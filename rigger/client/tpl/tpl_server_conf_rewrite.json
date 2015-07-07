@@ -1,0 +1,9 @@
+{
+    "is_dev": ${IS_DEV},
+    "mysql": {
+        "host": "127.0.0.1",
+        "user": "root",
+        "pass": "123",
+        "port": "3306"
+    }
+}

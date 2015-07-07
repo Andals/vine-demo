@@ -1,0 +1,10 @@
+*.swp
+*.DS_Store
+logs
+tags
+tmp
+vendor
+
+conf/server_conf_rewrite.json
+conf/server/*_server_conf_rewrite.json
+conf/http/*_http.conf*

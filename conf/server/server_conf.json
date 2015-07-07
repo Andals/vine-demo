@@ -1,0 +1,12 @@
+{
+    "prj_name": "vdemo",
+    "is_dev": false,
+    "static_server": "local",
+    "mysql": {
+        "host": "",
+        "user": "",
+        "pass": "",
+        "port": "",
+        "name": "vdemo"
+    }
+}

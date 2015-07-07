@@ -1,0 +1,46 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "dd6b6a5c7f7317cb07ac0643b872bba2",
+    "packages": [
+        {
+            "name": "Andals/vine",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Andals/vine.git",
+                "reference": "ee8e4d4caa0467503aa594238131d07157f61c07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Andals/vine/zipball/ee8e4d4caa0467503aa594238131d07157f61c07",
+                "reference": "ee8e4d4caa0467503aa594238131d07157f61c07",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Vine\\": "src/"
+                }
+            },
+            "support": {
+                "source": "https://github.com/Andals/vine/tree/master",
+                "issues": "https://github.com/Andals/vine/issues"
+            },
+            "time": "2015-07-08 01:43:27"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "andals/vine": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

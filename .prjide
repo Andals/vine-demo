@@ -1,0 +1,133 @@
+vdemo=$PWD in=tool/in.vim {
+ README.md
+ composer.json
+ composer.lock
+ conf=conf {
+  server_conf_rewrite.json
+  http=http {
+   ligang_front_http.conf.ngx
+   include=include {
+    fastcgi_general.conf
+    gzip.conf
+   }
+  }
+  misc=misc {
+   logrotate.conf
+  }
+  server=server {
+   ligang_server_conf_rewrite.json
+   server_conf.json
+  }
+ }
+ rigger=rigger {
+  client=client {
+   rigger.sh
+   rigger_conf.php
+   tpl=tpl {
+    tpl_front_httpd.conf.ngx
+    tpl_server_conf_rewrite.json
+   }
+  }
+  server=server {
+   conf.php
+   rigger.php
+   run.php
+   tool.php
+  }
+ }
+ src=src {
+  app=app {
+   ServerConf.php
+   Bootstrap=Bootstrap {
+    Front.php
+   }
+   Controller=Controller {
+    Front=Front {
+     Index.php
+    }
+   }
+   Lib=Lib {
+    Error=Error {
+     Errno.php
+     Exception.php
+    }
+   }
+   Model=Model {
+   }
+  }
+  run=run {
+   boot.php
+   front=front {
+    index.php
+   }
+  }
+  view=view {
+   front=front {
+    index.php
+   }
+  }
+ }
+ tool=tool {
+  in.vim
+  srcindex_cscope.sh
+  srcindex_ctags.sh
+ }
+ vendor=vendor {
+  autoload.php
+  Andals=Andals {
+   vine=vine {
+    README.md
+    composer.json
+    src=src {
+     Bootstrap.php
+     Loader.php
+     App=App {
+      Base.php
+      Web.php
+     }
+     Container=Container {
+      Obj.php
+     }
+     Contract=Contract {
+      Container.php
+      Controller.php
+      Request.php
+      Route.php
+      Router.php
+      View.php
+     }
+     Controller=Controller {
+      Base.php
+     }
+     Error=Error {
+      Errno.php
+      Exception.php
+     }
+     Http=Http {
+      Request.php
+     }
+     Routing=Routing {
+      Mvc.php
+      Router.php
+     }
+     View=View {
+      Base.php
+     }
+    }
+    tool=tool {
+     in.vim
+     srcindex_cscope.sh
+     srcindex_ctags.sh
+    }
+   }
+  }
+  composer=composer {
+   ClassLoader.php
+   autoload_classmap.php
+   autoload_namespaces.php
+   autoload_psr4.php
+   autoload_real.php
+   installed.json
+  }
+ }
+}

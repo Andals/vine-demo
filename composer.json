@@ -1,0 +1,15 @@
+{
+    "name": "Andals/vine_demo",
+    "autoload": {
+        "psr-4": {"Vdemo\\": "src/app"}
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Andals/vine"
+        }
+    ],
+    "require": {
+        "Andals/vine": "dev-master"
+    }
+}
