@@ -1,10 +1,14 @@
 <?php
 namespace Vdemo\Controller\Front;
 
-class Index extends \Vine\Controller\Base
+class Index extends \Vine\Component\Controller\Base
 {/*{{{*/
-    public function indexAction($request)
+    public function indexAction()
     {/*{{{*/
-        var_dump($request->getUri(), $request->getQueryString());
+        $body = 'uri: '.$this->request->getUri().' ';
+        $body.= 'queryString: '.$this->request->getQueryString();
+
+        $this->response->setBody($body);
+        $this->response->send();
     }/*}}}*/
 }/*}}}*/

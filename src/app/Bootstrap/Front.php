@@ -11,6 +11,6 @@ namespace Vdemo\Bootstrap;
 /**
     * This is front bootstrap
  */
-class Front extends \Vine\Bootstrap
+class Front extends \Vine\Framework\Bootstrap
 {/*{{{*/
 }/*}}}*/

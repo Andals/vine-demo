@@ -4,6 +4,7 @@ logs
 tags
 tmp
 vendor
+composer.lock
 
 conf/server_conf_rewrite.json
 conf/server/*_server_conf_rewrite.json

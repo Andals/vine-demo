@@ -1,7 +1,7 @@
 <?php
 require(dirname(__DIR__).'/boot.php');
 
-$webApp = new \Vine\App\Web('Vdemo');
+$webApp = new \Vine\Framework\App\Web('Vdemo');
 
 try {
     $webApp->bootStrap(new \Vdemo\Bootstrap\Front())->run('Front');
