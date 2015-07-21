@@ -3,7 +3,7 @@ namespace Vdemo\Controller\Front;
 
 class Index extends \Vine\Component\Controller\Base
 {/*{{{*/
-    public function indexAction()
+    public function index()
     {/*{{{*/
         $body = 'uri: '.$this->request->getUri().' ';
         $body.= 'queryString: '.$this->request->getQueryString();
