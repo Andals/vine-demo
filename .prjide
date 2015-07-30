@@ -63,7 +63,9 @@ vdemo=$PWD in=tool/in.vim {
   }
   view=view {
    front=front {
-    index.php
+    index=index {
+     index.php
+    }
    }
   }
  }

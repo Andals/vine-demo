@@ -1,2 +1,1 @@
-uri: <?php echo $uri; ?>
-queryString: <?php echo $queryString; ?>
+<p>urlPath: <?php echo $urlPath; ?></p>

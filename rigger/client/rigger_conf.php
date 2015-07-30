@@ -23,6 +23,14 @@ $ENV = array
         'FRONT_HTTP_CONF_TPL' => '${RIGGER_TPL_ROOT}/tpl_front_httpd.conf.ngx',
         'FRONT_HTTP_CONF_DST' => '${PRJ_HOME}/conf/http/${USER}_front_http.conf.ngx',
         'FRONT_HTTP_CONF_LN'  => '/usr/local/nginx/conf/include/${FRONT_DOMAIN}.conf',
+
+        'GENERAL_NGX_LOG_ROOT' => '/usr/local/nginx/logs',
+
+        'NGX_LOG_ROOT' => array(
+            'ligang'    => '${GENERAL_NGX_LOG_ROOT}',
+            'liangchao' => '${GENERAL_NGX_LOG_ROOT}',
+            'default'   => '/data/nginx/logs/${FRONT_DOMAIN}/web',
+        ),
     ),/*}}}*/
 );/*}}}*/
 
