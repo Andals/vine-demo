@@ -5,6 +5,13 @@
     },
     "repositories": [
         {
+            "packagist": false
+        },
+        {
+            "type": "composer",
+            "url": "http://packagist.phpcomposer.com"
+        },
+        {
             "type": "vcs",
             "url": "https://github.com/Andals/vine"
         }
