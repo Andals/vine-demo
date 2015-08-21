@@ -40,12 +40,12 @@ $PRJ = array
     'init_path' => array
     (/*{{{*/
         'tmp' => array(
-            'path' => '${PRJ_HOME}/tmp/',
+            'path' => '${PRJ_HOME}/tmp',
             'mask' => '777',
             'sudo' => false
         ),
-        'logs/front' => array(
-            'path' => '${PRJ_HOME}/logs/front',
+        'logs' => array(
+            'path' => '${PRJ_HOME}/logs',
             'mask' => '777',
             'sudo' => false
         ),

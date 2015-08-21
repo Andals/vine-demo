@@ -9,6 +9,6 @@
 
 namespace Vdemo\Lib\Error;
 
-class Exception extends \YueYue\Component\Exception
+class Exception extends \Vine\Framework\Error\Exception
 {/*{{{*/
 }/*}}}*/

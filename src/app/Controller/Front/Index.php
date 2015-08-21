@@ -9,8 +9,4 @@ class Index extends \Vine\Component\Controller\Base
 
         return $this->autoRender();
     }/*}}}*/
-    public function api($id = 0)
-    {/*{{{*/
-        return new \Vine\Component\Http\JsonResponse(array('id' => $id));
-    }/*}}}*/
 }/*}}}*/

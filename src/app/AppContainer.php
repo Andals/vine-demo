@@ -13,13 +13,15 @@ namespace Vdemo;
  */
 class AppContainer extends \Vine\Component\Container\General
 {/*{{{*/
-    const KEY_MODULE_NAME = 'moduleName';
+    const KEY_MODULE_NAME = 'module_name';
 
-    const KEY_RAW_SID = 'rawSid';
-    const KEY_LOG_ID  = 'logId';
+    const KEY_RAW_SID = 'raw_sid';
+    const KEY_LOG_ID  = 'log_id';
 
-    const KEY_SQL_LOGGER           = 'sqlLogger';
-    const KEY_GENERAL_LOG_FORMATER = 'generalLogFormater';
+    const KEY_GENERAL_LOG_FORMATER = 'general_log_formater';
+    const KEY_SQL_LOGGER           = 'sql_logger';
+    const KEY_SQL_DRIVER           = 'sql_driver';
+    const KEY_ID_GENTER            = 'id_genter';
 
     private static $instance = null;
 
@@ -82,7 +84,21 @@ class AppContainer extends \Vine\Component\Container\General
      */
     public function getRawSid()
     {/*{{{*/
-        return $this->get(self::KEY_RAW_SID);
+        $rawSid = $this->get(self::KEY_RAW_SID);
+        if ('' == $rawSid) {
+            list($usec, $sec) = explode(' ', microtime());
+
+            $sidData[] = \Vine\Component\Tool\Toolbox::getIp();
+            $sidData[] = \Vine\Component\Tool\Toolbox::getPort();
+            $sidData[] = $sec;
+            $sidData[] = number_format((float)$usec, 3) * 1000;
+            $sidData[] = rand(0, 999);
+
+            $rawSid = implode(',', $sidData);
+            $this->setRawSid($rawSid);
+        }
+
+        return $rawSid;
     }/*}}}*/
 
     /**
@@ -104,7 +120,13 @@ class AppContainer extends \Vine\Component\Container\General
      */
     public function getLogId()
     {/*{{{*/
-        return $this->get(self::KEY_LOG_ID);
+        $logId = $this->get(self::KEY_LOG_ID);
+        if ('' == $logId) {
+            $logId = base64_encode($this->getRawSid());
+            $this->setLogId($logId);
+        }
+
+        return $logId;
     }/*}}}*/
 
     /**
@@ -126,6 +148,101 @@ class AppContainer extends \Vine\Component\Container\General
      */
     public function getGeneralLogFormater()
     {/*{{{*/
-        return $this->get(self::KEY_GENERAL_LOG_FORMATER);
+        $formater = $this->get(self::KEY_GENERAL_LOG_FORMATER);
+        if (is_null($formater)) {
+            $formater = new \Vine\Component\Log\Formater\General($this->getLogId());
+            $this->setGeneralLogFormater($formater);
+        }
+
+        return $formater;
+    }/*}}}*/
+
+    /**
+        * Set sql logger
+        *
+        * @param \Vine\Component\Log\Logger $logger
+        *
+        * @return self
+     */
+    public function setSqlLogger(\Vine\Component\Log\Logger $logger)
+    {/*{{{*/
+        return $this->add(self::KEY_SQL_LOGGER, $logger);
+    }/*}}}*/
+
+    /**
+        * Get sql logger
+        *
+        * @return \Vine\Component\Log\Logger
+     */
+    public function getSqlLogger()
+    {/*{{{*/
+        $logger = $this->get(self::KEY_SQL_LOGGER);
+        if (is_null($logger)) {
+            $formater   = $this->getGeneralLogFormater();
+            $moduleName = $this->getModuleName();
+            $writer     = new \Vine\Component\Log\Writer\File(\Vdemo\ServerConf::getLogRoot().'/'.lcfirst($moduleName).'_mysql.log');
+            $logger     = new \Vine\Component\Log\Logger($formater, $writer);
+
+            $this->setSqlLogger($logger);
+        }
+
+        return $logger;
+    }/*}}}*/
+
+    /**
+        * Get mysql driver
+        *
+        * @return 
+     */
+    public function getSqlDriver()
+    {/*{{{*/
+        $driver = $this->get(self::KEY_SQL_DRIVER);
+        if (is_null($driver)) {
+            $logger = $this->getSqlLogger();
+            $dbConf = \Vdemo\ServerConf::getMysqlConf();
+            $driver = new \Vine\Component\Mysql\Driver($dbConf, $logger);
+
+            $this->add(self::KEY_SQL_DRIVER, $driver);
+        }
+
+        return $driver;
+    }/*}}}*/
+
+    /**
+        * Get IdGenter
+        *
+        * @return 
+     */
+    public function getIdGenter()
+    {/*{{{*/
+        $idGenter = $this->get(self::KEY_ID_GENTER);
+        if (is_null($idGenter)) {
+            $idGenter = new \Vdemo\Lib\IdGenter($this->getSqlDriver());
+
+            $this->add(self::KEY_ID_GENTER, $idGenter);
+        }
+
+        return $idGenter;
+    }/*}}}*/
+
+    /**
+        * Get svc which extends sqlBase
+        *
+        * @param $svcName
+        * @param $entityName
+        *
+        * @return 
+     */
+    public function getSqlSvc($svcName, $entityName = '')
+    {/*{{{*/
+        $clsName = '\Vdemo\Model\Svc\\'.str_replace('/', '\\', $svcName);
+
+        $svc = $this->get($clsName);
+        if (is_null($svc)) {
+            $svc = new $clsName($entityName);
+            $this->add($clsName, $svc);
+        }
+
+        return $svc;
     }/*}}}*/
 }/*}}}*/
