@@ -45,9 +45,9 @@ vdemo=$PWD in=tool/in.vim {
    }
    Controller=Controller {
     Front=Front {
-     Demo.php
-     Error.php
-     Index.php
+     DemoController.php
+     ErrorController.php
+     IndexController.php
     }
    }
    Lib=Lib {

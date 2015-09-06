@@ -1,9 +1,9 @@
 <?php
 namespace Vdemo\Controller\Front;
 
-class Index extends \Vine\Component\Controller\Base
+class IndexController extends \Vine\Component\Controller\BaseController
 {/*{{{*/
-    public function index()
+    public function indexAction()
     {/*{{{*/
         $this->assign('urlPath', $this->request->getUrlPath());
 

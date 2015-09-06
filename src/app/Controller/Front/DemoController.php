@@ -1,7 +1,7 @@
 <?php
 namespace Vdemo\Controller\Front;
 
-class Demo extends \Vine\Component\Controller\Base
+class DemoController extends \Vine\Component\Controller\BaseController
 {/*{{{*/
     private $demoSvc = null; 
 
@@ -13,7 +13,7 @@ class Demo extends \Vine\Component\Controller\Base
         $this->demoSvc = \Vdemo\AppContainer::getInstance()->getSqlSvc('Demo');
     }/*}}}*/
 
-    public function index()
+    public function indexAction()
     {/*{{{*/
         $total    = $this->demoSvc->selectTotalByParamsForFront($this->actionParams);
         $pageObj  = new \Vdemo\Lib\PageObj($this->actionParams['pageno'], $total);
@@ -25,17 +25,17 @@ class Demo extends \Vine\Component\Controller\Base
 
         return $this->autoRender();
     }/*}}}*/
-    public function add()
+    public function addAction()
     {/*{{{*/
         return $this->autoRender();
     }/*}}}*/
-    public function addEntity()
+    public function addEntityAction()
     {/*{{{*/
         $this->demoSvc->insert($this->actionParams);
 
         return \Vdemo\Lib\ApiResponseFactory::getSuccessResponse(array(), '添加成功', $this->request);
     }/*}}}*/
-    public function edit()
+    public function editAction()
     {/*{{{*/
         $demoItem = $this->demoSvc->selectById($this->actionParams['id']);
 
@@ -43,13 +43,13 @@ class Demo extends \Vine\Component\Controller\Base
 
         return $this->autoRender();
     }/*}}}*/
-    public function editEntity()
+    public function editEntityAction()
     {/*{{{*/
         $this->demoSvc->update($this->actionParams);
 
         return \Vdemo\Lib\ApiResponseFactory::getSuccessResponse(array(), '编辑成功', $this->request);
     }/*}}}*/
-    public function del()
+    public function delAction()
     {/*{{{*/
         $this->demoSvc->deleteById($this->actionParams['id']);
 
