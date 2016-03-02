@@ -14,42 +14,57 @@ class Smarty extends \Vine\Component\View\Base
 
     /**
      * construct method
-     *
-     * @param string $compileDir
-     * @param string $cacheDir
-     * @param string $caching
-     * @param string $leftDelimiter
-     * @param string $rightDelimiter
+     * 
+     * @param \Smarty $smarty
      */
-    public function __construct($compileDir, $cacheDir = "./", $caching = false, $leftDelimiter = "{%", $rightDelimiter = "%}")
+    public function __construct(\Smarty $smarty)
     {
-        // init Smarty
-        $this->smarty = new \Smarty();
-        $this->smarty->caching = $caching;
-        
-        $this->smarty->template_dir = $this->viewRoot;
-        $this->smarty->compile_dir = $compileDir;
-        $this->smarty->cache_dir = $cacheDir;
-        
-        $this->smarty->left_delimiter = $leftDelimiter;
-        $this->smarty->right_delimiter = $rightDelimiter;
+        $this->smarty = $smarty;
     }
-
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setViewRoot($viewRoot)
+    {
+        $this->viewRoot = rtrim($viewRoot, '/') . '/';
+        $this->smarty->template_dir = $this->viewRoot;    
+    }
     
     /**
      * {@inheritdoc}
      */
     public function assign($key, $value, $secureFilter=true)
     {
-        $this->smarty->assign($key, $value, $secureFilter);
+        if ($secureFilter) {
+            if (is_array($value)) {
+                array_walk_recursive($value, function (&$item, $key) {
+                    if (is_string($item)) {
+                        $item = htmlspecialchars($item);
+                    }
+                });
+            } else if (is_string($value)) {
+                $value = htmlspecialchars($value);
+            }
+        }
+        
+        $this->smarty->assign($key, $value);
     }
     
     /**
      * {@inheritdoc}
      */
-    public function render($tplName, $data=array())
+    public function render($viewFile, $withViewSuffix = false, array $data = array())
     {
-        $tplFile = $this->getTplFile($tplName);
-        return $this->smarty->fetch($tplFile);
+        $viewFile = $this->getViewFileWithViewRoot($viewFile, $withViewSuffix);
+        
+        // assin variable
+        foreach ($data as $key => $value) {
+            $this->assign($key, $value);
+        }
+        
+        ob_start();
+        $this->smarty->display($viewFile);
+        return ob_get_clean();
     }
 }
