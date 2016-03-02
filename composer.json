@@ -17,6 +17,7 @@
         }
     ],
     "require": {
-        "Andals/vine": "dev-master"
+        "Andals/vine": "dev-master",
+        "smarty/smarty": "3.1.15"
     }
 }

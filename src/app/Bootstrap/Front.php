@@ -19,7 +19,9 @@ class Front extends Base
      */
     public function boot(\Vine\Component\Container\Web $container)
     {/*{{{*/
+        // init simple view or smarty view
         $this->initView($container);
+        //$this->initSmartyView($container);  
     }/*}}}*/
 
 
@@ -29,6 +31,17 @@ class Front extends Base
         $view->setViewRoot(\Vdemo\ServerConf::getViewRoot());
         $view->setViewSuffix('php');
 
+        $container->setView($view);
+    }/*}}}*/
+    
+    private function initSmartyView($container)
+    {/*{{{*/
+        $smarty = new \Smarty();
+        $smarty->setCompileDir(\Vdemo\ServerConf::getTmpRoot().'/compile');
+        $view = new \Vdemo\Lib\View\Smarty($smarty);
+        $view->setViewRoot(\Vdemo\ServerConf::getViewRoot());
+        $view->setViewSuffix('php');
+    
         $container->setView($view);
     }/*}}}*/
 }/*}}}*/
