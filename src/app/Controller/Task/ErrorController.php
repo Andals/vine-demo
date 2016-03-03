@@ -1,5 +1,5 @@
 <?php
-namespace Huajiao\Controller\Task;
+namespace Vdemo\Controller\Task;
 
 class ErrorController extends \Vine\Component\Controller\BaseController
 {/*{{{*/

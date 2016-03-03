@@ -1,12 +1,5 @@
 <?php
-/**
-* @file Api.php
-* @author ligang
-* @version 1.0
-* @date 2015-07-07
- */
-
-namespace Huajiao\Bootstrap;
+namespace Vdemo\Bootstrap;
 
 /**
     * This is api bootstrap
@@ -21,7 +14,7 @@ class Task extends \Vine\Framework\Bootstrap\Task
             $moduleName = substr($clsName, $pos + 1);
         }
 
-        \Huajiao\AppContainer::getInstance()->setModuleName($moduleName);
+        \Vdemo\AppContainer::getInstance()->setModuleName($moduleName);
     }/*}}}*/
 
     /**

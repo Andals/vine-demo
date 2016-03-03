@@ -10,8 +10,8 @@ class DemoController extends \Vine\Component\Controller\BaseController
 
     protected function setPrintActionParamsConf($conf)
     {/*{{{*/
-        $this->setParamFlushNum($conf);
-        $this->setParamExitNum($conf);
+        $this->setParamId($conf);
+        $this->setParamName($conf);
     }/*}}}*/
 
 
