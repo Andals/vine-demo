@@ -40,11 +40,11 @@ class Smarty extends \Vine\Component\View\Base
             if (is_array($value)) {
                 array_walk_recursive($value, function (&$item, $key) {
                     if (is_string($item)) {
-                        $item = htmlspecialchars($item);
+                        $item = htmlspecialchars($item, ENT_QUOTES);
                     }
                 });
             } else if (is_string($value)) {
-                $value = htmlspecialchars($value);
+                $value = htmlspecialchars($value, ENT_QUOTES);
             }
         }
         
