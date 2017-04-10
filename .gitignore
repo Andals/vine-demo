@@ -9,3 +9,6 @@ composer.lock
 conf/server_conf_rewrite.json
 conf/server/*_server_conf_rewrite.json
 conf/http/*_http.conf*
+
+vine-demo.iml
+.idea
